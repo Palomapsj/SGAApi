@@ -14,40 +14,40 @@ namespace FiapStore.Repository
         {
 
         }
-
         public override void Alterar(Usuario entidade)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-                var query = "UPDATE USUARIO SET NAME = @NAME WHERE ID = @Id ";
+                var query = "UPDATE USUARIO SET USERNAME = @UserName WHERE USUARIO_ID = @UsuarioId ";
                 dbConnection.Query(query, entidade);
 
         }
-
         public override void Cadastrar(Usuario entidade)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "INSERT INTO USUARIOO (NAME) VALUES (@NAME)  ";
+            var query = "INSERT INTO USUARIOO  VALUES (@UserName, @Senha, @TipoUsuario, @Idreferente)  ";
             dbConnection.Execute(query, entidade);
         }
 
         public override void Deletar(int id)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "DELETE FROM USUARIO where Id = @Id";
-            dbConnection.Execute(query, new {Id =id });
+            var query = "DELETE FROM USUARIOO where usuario_id = @Id";
+            dbConnection.Execute(query, new {Id = id });
         }
 
         public override Usuario ObterPorId(int id)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "SELECT * FROM USUARIO where Id = @Id";
-            return dbConnection.Query<Usuario>(query).FirstOrDefault();
+            var query = "SELECT * FROM USUARIOO where usuario_id = @Id";
+
+            return dbConnection.QueryFirstOrDefault<Usuario>(query, new { Id = id });
+
         }
 
         public override IList<Usuario> ObterTodos()
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "SELECT * FROM USUARIO ";
+            var query = "SELECT * FROM USUARIOO ";
             return dbConnection.Query<Usuario>(query).ToList();
         }
     }

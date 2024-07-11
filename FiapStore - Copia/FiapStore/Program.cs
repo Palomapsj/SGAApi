@@ -10,6 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddSingleton<IAlunoRepository, AlunoRepository>();
+builder.Services.AddSingleton<IProfessorRepository, ProfessoresRepository>();
+builder.Services.AddSingleton<ICursoRepository, CursosRepository>();
+builder.Services.AddSingleton<ITurmaRepository, TurmaRepository>();
+builder.Services.AddSingleton<IMatriculaRepository, MatriculasRepository>();
+
 
 var app = builder.Build();
 

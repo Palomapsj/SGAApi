@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Palom\\source\\repos\\FiapStore - Copia\\FiapStore\\FiapStore.csproj": {}
+    "C:\\Users\\Palom\\OneDrive\\Documentos\\GitHub\\SGAApi\\FiapStore - Copia\\FiapStore\\FiapStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Palom\\source\\repos\\FiapStore - Copia\\FiapStore\\FiapStore.csproj": {
+    "C:\\Users\\Palom\\OneDrive\\Documentos\\GitHub\\SGAApi\\FiapStore - Copia\\FiapStore\\FiapStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Palom\\source\\repos\\FiapStore - Copia\\FiapStore\\FiapStore.csproj",
+        "projectUniqueName": "C:\\Users\\Palom\\OneDrive\\Documentos\\GitHub\\SGAApi\\FiapStore - Copia\\FiapStore\\FiapStore.csproj",
         "projectName": "FiapStore",
-        "projectPath": "C:\\Users\\Palom\\source\\repos\\FiapStore - Copia\\FiapStore\\FiapStore.csproj",
+        "projectPath": "C:\\Users\\Palom\\OneDrive\\Documentos\\GitHub\\SGAApi\\FiapStore - Copia\\FiapStore\\FiapStore.csproj",
         "packagesPath": "C:\\Users\\Palom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Palom\\source\\repos\\FiapStore - Copia\\FiapStore\\obj\\",
+        "outputPath": "C:\\Users\\Palom\\OneDrive\\Documentos\\GitHub\\SGAApi\\FiapStore - Copia\\FiapStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +53,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
