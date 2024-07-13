@@ -1,0 +1,63 @@
+﻿@page
+@model SGA.Apresentation.Pages.CadastroNotasModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Notas dos Alunos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Cadastro de Notas dos Alunos</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="aluno">Nome do Aluno</label>
+                                <select class="form-control" id="aluno" required>
+                                    <option value="">Selecione o aluno</option>
+                                    <option value="Joao Silva">João Silva</option>
+                                    <option value="Maria Oliveira">Maria Oliveira</option>
+                                    <!-- Adicione mais alunos conforme necessário -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="disciplina">Disciplina</label>
+                                <select class="form-control" id="disciplina" required>
+                                    <option value="">Selecione a disciplina</option>
+                                    <option value="Matematica">Matemática</option>
+                                    <option value="Portugues">Português</option>
+                                    <option value="Historia">História</option>
+                                    <option value="Geografia">Geografia</option>
+                                    <!-- Adicione mais disciplinas conforme necessário -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nota">Nota</label>
+                                <input type="number" class="form-control" id="nota" placeholder="Digite a nota" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Cadastrar Nota</button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>&copy; 2024 - Sistema de Cadastro de Notas</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+@*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+*@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

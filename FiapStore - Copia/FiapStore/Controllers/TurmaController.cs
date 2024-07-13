@@ -3,6 +3,7 @@ using FiapStore.Entidade;
 using FiapStore.Interface;
 using FiapStore.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace FiapStore.Controllers
 {
@@ -11,47 +12,106 @@ namespace FiapStore.Controllers
     public class TurmaController : ControllerBase
     {
         private ITurmaRepository _turmaRepository;
+        private readonly ILogger<UsuarioController> _logger;
 
-        public TurmaController(ITurmaRepository turmaRepository)
+        public TurmaController(ITurmaRepository turmaRepository, ILogger<UsuarioController> logger)
         {
 
             _turmaRepository = turmaRepository;
+            _logger = logger;
 
         }
 
         [HttpGet("Obter-turma-porid/{id}")]
         public IActionResult ObtertPorTurma(int id)
         {
-            return Ok(_turmaRepository.ObterPorId(id));
+            try {
+               
+                _logger.LogInformation("Buscando Turma");
+
+                return Ok(_turmaRepository.ObterPorId(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar obter turma no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar obter turma");
+            }
         }
 
         [HttpGet("Obter-turma")]
         public IActionResult ObtertTurma()
         {
-            return Ok(_turmaRepository.ObterTodos());
+            try
+            {
+                _logger.LogInformation("Buscando Turmas");
+
+                return Ok(_turmaRepository.ObterTodos());
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar obter turmas no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar obter turmas");
+
+            }
         }
 
         [HttpPost("Cadastro-turma")]
         public IActionResult CadastrarTurma(AdcionarTurmaDTO turmaDTO)
         {
-            _turmaRepository.Cadastrar(new Turma(turmaDTO));
-            return Ok("Turma cadastrado com sucesso");
+            try
+            {
+                _logger.LogInformation("cadastro de turma");
+
+                _turmaRepository.Cadastrar(new Turma(turmaDTO));
+                return Ok("Turma cadastrada com sucesso");
+
+        }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar cadastrar turma no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar cadastrar turma");
+
+            }
         }
 
         [HttpPut("Alterar-turma")]
         public IActionResult AlterarTurma(AlterarTurmaDTO turmaDTO)
         {
+            try
+            {
+                _logger.LogInformation("Alterar turma");
 
-            _turmaRepository.Alterar(new Turma(turmaDTO));
+                _turmaRepository.Alterar(new Turma(turmaDTO));
 
-            return Ok("Turma alterada com sucesso");
+                 return Ok("Turma alterada com sucesso");
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar alterar turma no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar alterar turma");
+
+            }
         }
 
         [HttpDelete("Deletar-Turma/{id}")]
         public IActionResult DeletarTurma(int id)
         {
-            _turmaRepository.Deletar(id);
+            try
+            {
+                _logger.LogInformation("Deletando turma");
+
+                _turmaRepository.Deletar(id);
             return Ok("Turma deletada com sucesso");
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar deletar turma no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar deletar turma");
+
+            }
         }
 
     }

@@ -1,0 +1,109 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <!-- Link do Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        .bg {
+
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .auth-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-top:300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="container auth-container">
+            <div class="auth-form" id="login-form">
+                <h3 class="text-center">Login</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="Digite seu email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" class="form-control" id="login-password" placeholder="Digite sua senha">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    <div class="text-center mt-3">
+                        <a href="#">Esqueceu a senha?</a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="#" onclick="showRegisterForm()">Não tem uma conta? Cadastre-se</a>
+                    </div>
+                </form>
+            </div>
+            <div class="auth-form" id="register-form" style="display:none;">
+                <h3 class="text-center">Cadastre-se</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="register-name">Nome</label>
+                        <input type="text" class="form-control" id="register-name" placeholder="Digite seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="Digite seu email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Senha</label>
+                        <input type="password" class="form-control" id="register-password" placeholder="Digite sua senha">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                    <div class="text-center mt-2">
+                        <a href="#" onclick="showLoginForm()">Já tem uma conta? Faça login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link do Bootstrap JS e dependências Popper.js e jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+@*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+*@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showRegisterForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

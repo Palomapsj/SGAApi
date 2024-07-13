@@ -1,0 +1,89 @@
+﻿@page
+@model SGA.Apresentation.Pages.ConsultarAlunosModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Alunos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Consulta de Alunos</h3>
+                    </div>
+                    <div class="card-body">
+                        <form class="mb-4">
+                            <div class="form-group">
+                                <label for="nome">Nome do Aluno</label>
+                                <input type="text" class="form-control" id="nome" placeholder="Digite o nome do aluno">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Consultar</button>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Data de Nascimento</th>
+                                        <th>Telefone</th>
+                                        <th>Endereço</th>
+                                        <th>Curso</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>João Silva</td>
+                                        <td>joao@example.com</td>
+                                        <td>01/01/2000</td>
+                                        <td>(11) 98765-4321</td>
+                                        <td>Rua A, 123</td>
+                                        <td>Engenharia</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm">Editar</button>
+                                            <button class="btn btn-danger btn-sm">Excluir</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Maria Oliveira</td>
+                                        <td>maria@example.com</td>
+                                        <td>02/02/2001</td>
+                                        <td>(21) 98765-4322</td>
+                                        <td>Rua B, 456</td>
+                                        <td>Medicina</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm">Editar</button>
+                                            <button class="btn btn-danger btn-sm">Excluir</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Adicione mais linhas conforme necessário -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>&copy; 2024 - Sistema de Consulta de Alunos</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+@*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+*@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
