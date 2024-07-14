@@ -1,0 +1,28 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FiapStore - Copia/SGA.Apresentation/obj/Debug/net7.0/project.razor.vs.json
+/FiapStore - Copia/SGA.Apresentation/obj/Debug/net7.0/SGA.Apresentation.AssemblyInfo.cs
+/FiapStore - Copia/SGA.Apresentation/obj/Debug/net7.0/SGA.Apresentation.assets.cache
+/FiapStore - Copia/SGA.Apresentation/obj/Debug/net7.0/SGA.Apresentation.csproj.AssemblyReference.cache
+/FiapStore - Copia/SGA.Apresentation/obj/Debug/net7.0/SGA.Apresentation.GeneratedMSBuildEditorConfig.editorconfig
+/FiapStore - Copia/SGA.Apresentation/obj/project.assets.json
+/FiapStore - Copia/SGA.Apresentation/obj/project.nuget.cache
+/FiapStore - Copia/SGA.Apresentation/obj/SGA.Apresentation.csproj.nuget.dgspec.json
+/FiapStore - Copia/SGA.Apresentation/obj/SGA.Apresentation.csproj.nuget.g.props
+/.vs/Tech_Challenge_4/v17/.wsuo
+/FiapStore - Copia/.vs/FiapStore/v17/.suo
+/FiapStore - Copia/.vs/FiapStore/DesignTimeBuild/.dtbcache.v2
+/FiapStore - Copia/.vs/FiapStore/FileContentIndex/000c31c6-e9a6-45c7-9a4d-f982e80e828e.vsidx
+/FiapStore - Copia/.vs/FiapStore/FileContentIndex/6d092ea0-d429-4db9-b248-f901128a6d48.vsidx
+/FiapStore - Copia/.vs/FiapStore/FileContentIndex/6d79fe46-6ac2-4a2e-bf62-2aadd987674d.vsidx
+/FiapStore - Copia/.vs/FiapStore/FileContentIndex/f3d4a386-8e0f-4e47-8d9e-09ddd693dc9b.vsidx
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.AssemblyInfo.cs
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.assets.cache
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.csproj.AssemblyReference.cache
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.GeneratedMSBuildEditorConfig.editorconfig
+/FiapStore - Copia/FiapStore/obj/FiapStore.csproj.nuget.dgspec.json
+/FiapStore - Copia/FiapStore/obj/FiapStore.csproj.nuget.g.props
+/FiapStore - Copia/FiapStore/obj/project.assets.json
+/FiapStore - Copia/FiapStore/obj/project.nuget.cache
