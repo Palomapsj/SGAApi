@@ -70,5 +70,12 @@ namespace FiapStore.Repository
                                      body: body);
             }
         }
+        public Usuario GetUserByNameAndPassword(string userName, string password)
+        {
+            using var dbConnection = new SqlConnection(ConnectionString);
+            var query = "SELECT * FROM USUARIO where username = @userName and senha = @password";
+
+            return dbConnection.QueryFirstOrDefault<Usuario>(query, new { userName, password });
+        }
     }
 }

@@ -2,6 +2,7 @@
 using FiapStore.Entidade;
 using FiapStore.Interface;
 using FiapStore.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -22,11 +23,12 @@ namespace FiapStore.Controllers
 
         }
 
+        [Authorize]
         [HttpGet("Obter-turma-porid/{id}")]
         public IActionResult ObtertPorTurma(int id)
         {
-            try {
-               
+            try
+            {
                 _logger.LogInformation("Buscando Turma");
 
                 return Ok(_turmaRepository.ObterPorId(id));
@@ -38,6 +40,7 @@ namespace FiapStore.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("Obter-turma")]
         public IActionResult ObtertTurma()
         {
@@ -52,10 +55,10 @@ namespace FiapStore.Controllers
             {
                 _logger.LogError(ex, "Erro ao tentar obter turmas no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar obter turmas");
-
             }
         }
 
+        [Authorize]
         [HttpPost("Cadastro-turma")]
         public IActionResult CadastrarTurma(AdcionarTurmaDTO turmaDTO)
         {
@@ -66,15 +69,15 @@ namespace FiapStore.Controllers
                 _turmaRepository.Cadastrar(new Turma(turmaDTO));
                 return Ok("Turma cadastrada com sucesso");
 
-        }
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao tentar cadastrar turma no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar cadastrar turma");
-
             }
         }
 
+        [Authorize]
         [HttpPut("Alterar-turma")]
         public IActionResult AlterarTurma(AlterarTurmaDTO turmaDTO)
         {
@@ -84,17 +87,17 @@ namespace FiapStore.Controllers
 
                 _turmaRepository.Alterar(new Turma(turmaDTO));
 
-                 return Ok("Turma alterada com sucesso");
+                return Ok("Turma alterada com sucesso");
 
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao tentar alterar turma no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar alterar turma");
-
             }
         }
 
+        [Authorize]
         [HttpDelete("Deletar-Turma/{id}")]
         public IActionResult DeletarTurma(int id)
         {
@@ -103,14 +106,13 @@ namespace FiapStore.Controllers
                 _logger.LogInformation("Deletando turma");
 
                 _turmaRepository.Deletar(id);
-            return Ok("Turma deletada com sucesso");
+                return Ok("Turma deletada com sucesso");
 
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao tentar deletar turma no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar deletar turma");
-
             }
         }
 

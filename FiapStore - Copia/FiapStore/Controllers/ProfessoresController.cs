@@ -1,6 +1,7 @@
 ﻿using FiapStore.DTO;
 using FiapStore.Entidade;
 using FiapStore.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiapStore.Controllers
@@ -14,13 +15,11 @@ namespace FiapStore.Controllers
 
         public ProfessoresController(IProfessorRepository professoresRepository, ILogger<UsuarioController> logger)
         {
-
             _professoresRepository = professoresRepository;
             _logger = logger;
-
-
         }
 
+        [Authorize]
         [HttpGet("Obter-professor-porid/{id}")]
         public IActionResult ObtertPorUsuario(int id)
         {
@@ -33,81 +32,77 @@ namespace FiapStore.Controllers
             {
                 _logger.LogError(ex, "Erro ao tentar obter professore no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar obter professor");
-
-
             }
         }
 
+        [Authorize]
         [HttpGet("Obter-professores")]
-        public IActionResult ObtertProfessor() {
-        
-        try {
+        public IActionResult ObtertProfessor()
+        {
+
+            try
+            {
                 _logger.LogInformation("Buscando professores");
 
                 return Ok(_professoresRepository.ObterTodos());
-
-        }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao tentar obter professores no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar obter professores");
             }
-  
+        }
 
-
-        }       
-
-
+        [Authorize]
         [HttpPost("Cadastro-professor")]
-        public IActionResult CadastrarProfessor(AdicionarProfessorDTO ProfessorDTO) {
-         try
-         {
-         _logger.LogInformation("Cadastrando professor");
-         _professoresRepository.Cadastrar(new Professor (ProfessorDTO));
-            return Ok("Professor cadastrado com sucesso");
-    }
-        catch (Exception ex)
+        public IActionResult CadastrarProfessor(AdicionarProfessorDTO ProfessorDTO)
         {
-        _logger.LogError(ex, "Erro ao tentar cadastrar professor no banco de dados");
-        return StatusCode(500, "Erro interno ao tentar cadastrar professor");
+            try
+            {
+                _logger.LogInformation("Cadastrando professor");
+                _professoresRepository.Cadastrar(new Professor(ProfessorDTO));
+                return Ok("Professor cadastrado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar cadastrar professor no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar cadastrar professor");
+            }
+        }
 
-
-    }
-}
-
+        [Authorize]
         [HttpPut("Alterar-professor")]
-        public IActionResult AlterarProfessor(AlterarProfessorDTO ProfessorDTO) {
-        try
+        public IActionResult AlterarProfessor(AlterarProfessorDTO ProfessorDTO)
         {
-         _logger.LogInformation("Alterando professor");
-         _professoresRepository.Alterar(new Professor(ProfessorDTO));
+            try
+            {
+                _logger.LogInformation("Alterando professor");
+                _professoresRepository.Alterar(new Professor(ProfessorDTO));
 
-            return Ok("Professor alterado com sucesso");
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "Erro ao tentar alterar professor no banco de dados");
-        return StatusCode(500, "Erro interno ao tentar alterar professor");
-
-
-    }
-}
+                return Ok("Professor alterado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar alterar professor no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar alterar professor");
+            }
+        }
 
         [HttpDelete("Deletar-professor/{id}")]
-        public IActionResult DeletarProfessor(int id) {
-        try
-         {
-        _logger.LogInformation("Deletando professor");
-        _professoresRepository.Deletar(id);
+        public IActionResult DeletarProfessor(int id)
+        {
+            try
+            {
+                _logger.LogInformation("Deletando professor");
+                _professoresRepository.Deletar(id);
 
-            return Ok("Professor deletado com sucesso");
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "Erro ao tentar deletar professor no banco de dados");
-        return StatusCode(500, "Erro interno ao tentar deletar professor");
-
-
-    }
-}
+                return Ok("Professor deletado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar deletar professor no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar deletar professor");
+            }
+        }
     }
 }

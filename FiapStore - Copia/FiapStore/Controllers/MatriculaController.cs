@@ -2,6 +2,7 @@
 using FiapStore.Entidade;
 using FiapStore.Interface;
 using FiapStore.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiapStore.Controllers
@@ -15,26 +16,27 @@ namespace FiapStore.Controllers
 
         public MatriculaController(IMatriculaRepository matriculaRepository, ILogger<UsuarioController> logger)
         {
-                _matriculaRepository = matriculaRepository;
-               _logger = logger;
+            _matriculaRepository = matriculaRepository;
+            _logger = logger;
         }
 
+        [Authorize]
         [HttpGet("Obter-Matricula-porid/{id}")]
         public IActionResult ObtertPorTurma(int id)
         {
-           try
-           {
-         
-           _logger.LogInformation("Buscando matricula");
-           return Ok(_matriculaRepository.ObterPorId(id));
-           }
-           catch (Exception ex)
-           {
-           _logger.LogError(ex, "Erro ao tentar obter matricula no banco de dados");
-           return StatusCode(500, "Erro interno ao tentar obter matricula");
-           }
+            try
+            {
+                _logger.LogInformation("Buscando matricula");
+                return Ok(_matriculaRepository.ObterPorId(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao tentar obter matricula no banco de dados");
+                return StatusCode(500, "Erro interno ao tentar obter matricula");
+            }
         }
 
+        [Authorize]
         [HttpGet("Obter-Matricula")]
         public IActionResult ObtertTurma()
         {
@@ -48,14 +50,14 @@ namespace FiapStore.Controllers
                 _logger.LogError(ex, "Erro ao tentar obter matricula no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar obter matricula");
             }
-                }
+        }
 
+        [Authorize]
         [HttpPost("Cadastro-Matricula")]
         public IActionResult CadastrarTurma(AdicionarMatriculaDTO matriculaDTO)
         {
             try
             {
-
                 _logger.LogInformation("cadastrando matricula");
                 _matriculaRepository.Cadastrar(new Matricula(matriculaDTO));
                 return Ok("Matricula cadastrado com sucesso");
@@ -65,14 +67,14 @@ namespace FiapStore.Controllers
                 _logger.LogError(ex, "Erro ao tentar cadastrar matricula no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar cadastrar matricula");
             }
-                    }
+        }
 
+        [Authorize]
         [HttpPut("Alterar-Matricula")]
         public IActionResult AlterarMatricula(AlterarMatriculaDTO matriculaDTO)
         {
             try
             {
-
                 _logger.LogInformation("alterando matricula");
                 _matriculaRepository.Alterar(new Matricula(matriculaDTO));
 
@@ -83,8 +85,9 @@ namespace FiapStore.Controllers
                 _logger.LogError(ex, "Erro ao tentar alterar matricula no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar alterar matricula");
             }
-                        }
+        }
 
+        [Authorize]
         [HttpDelete("Deletar-Matricula/{id}")]
         public IActionResult DeletarMatricula(int id)
         {
@@ -100,7 +103,7 @@ namespace FiapStore.Controllers
                 _logger.LogError(ex, "Erro ao tentar deletar matricula no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar deletar matricula");
             }
-                            }
+        }
 
     }
 }
