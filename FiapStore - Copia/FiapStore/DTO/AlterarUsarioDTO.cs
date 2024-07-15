@@ -1,6 +1,6 @@
 ﻿namespace FiapStore.DTO
 {
-    public class AlterarUusarioDTO
+    public class AlterarUsarioDTO
     {
         public int UsuarioId { get; set; }
 

@@ -1,44 +1,45 @@
 ﻿using Dapper;
 using FiapStore.Entidade;
 using FiapStore.Interface;
+using RabbitMQ.Client;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace FiapStore.Repository
 {
     public class UsuarioRepository : DapperRepository<Usuario>, IUsuarioRepository
     {
+        private readonly ConnectionFactory _factory;
         private IList<Usuario> _usuario = new List<Usuario>();
 
         public UsuarioRepository(IConfiguration configuration) : base(configuration)
         {
-
+            _factory = new ConnectionFactory() { HostName = "localhost" };
         }
+
         public override void Alterar(Usuario entidade)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-                var query = "UPDATE USUARIO SET USERNAME = @UserName WHERE USUARIO_ID = @UsuarioId ";
-                dbConnection.Query(query, entidade);
-
+            PublishToQueue("queue-usuario-update", entidade);
         }
+
         public override void Cadastrar(Usuario entidade)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "INSERT INTO USUARIOO  VALUES (@UserName, @Senha, @TipoUsuario, @Idreferente)  ";
-            dbConnection.Execute(query, entidade);
+            PublishToQueue("queue-usuario-save", entidade);
         }
 
         public override void Deletar(int id)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "DELETE FROM USUARIOO where usuario_id = @Id";
-            dbConnection.Execute(query, new {Id = id });
+            Usuario entidade = new Usuario();
+            entidade.Id = id;
+
+            PublishToQueue("queue-usuario-delete", entidade);
         }
 
         public override Usuario ObterPorId(int id)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "SELECT * FROM USUARIOO where usuario_id = @Id";
+            var query = "SELECT * FROM USUARIO where usuario_id = @Id";
 
             return dbConnection.QueryFirstOrDefault<Usuario>(query, new { Id = id });
 
@@ -47,8 +48,27 @@ namespace FiapStore.Repository
         public override IList<Usuario> ObterTodos()
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "SELECT * FROM USUARIOO ";
+            var query = "SELECT * FROM USUARIO";
             return dbConnection.Query<Usuario>(query).ToList();
+        }
+
+        private void PublishToQueue(string queueName, Usuario entidade)
+        {
+            using (var connection = _factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: queueName,
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+
+                var body = JsonSerializer.SerializeToUtf8Bytes(entidade);
+                channel.BasicPublish(exchange: "",
+                                     routingKey: queueName,
+                                     basicProperties: null,
+                                     body: body);
+            }
         }
     }
 }

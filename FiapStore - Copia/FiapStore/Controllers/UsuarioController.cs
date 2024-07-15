@@ -30,8 +30,6 @@ namespace FiapStore.Controllers
             {
                 _logger.LogError(ex, "Erro ao tentar obter usuário no banco de dados");
                 return StatusCode(500, "Erro interno ao tentar obter usuário");
-
-
             }
         }
 
@@ -75,7 +73,7 @@ namespace FiapStore.Controllers
         }
 
         [HttpPut("Alterar-usuario")]
-        public IActionResult AlterarUsuario(AlterarUusarioDTO UsuarioDTO) {
+        public IActionResult AlterarUsuario(AlterarUsarioDTO UsuarioDTO) {
 
             try { 
             _logger.LogInformation("Tentando alterar o usuario no banco de dados");

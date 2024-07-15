@@ -1,36 +1,36 @@
 ﻿using Dapper;
 using FiapStore.Entidade;
 using FiapStore.Interface;
+using RabbitMQ.Client;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace FiapStore.Repository
 {
     public class TurmaRepository : DapperRepository<Turma>, ITurmaRepository
     {
+        private readonly ConnectionFactory _factory;
         public TurmaRepository(IConfiguration configuration) : base(configuration)
         {
-
+            _factory = new ConnectionFactory() { HostName = "localhost" };
         }
         public override void Alterar(Turma entidade)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "UPDATE Turmas SET NOME = @Nome, Horario = @Horario, Local = @Local WHERE turma_id = @TurmaId ";
-            dbConnection.Query(query, entidade);
+            PublishToQueue("queue-turma-update", entidade);
         }
 
         public override void Cadastrar(Turma entidade)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "INSERT INTO Turmas  VALUES (@CursoId, @Nome, @Horario, @Local)";
-            dbConnection.Execute(query, entidade);
+            PublishToQueue("queue-turma-save", entidade);
         }
 
         public override void Deletar(int id)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "DELETE FROM Turmas where turma_id = @Id";
-            dbConnection.Execute(query, new { Id = id });
+            Turma entidade = new Turma();
+            entidade.Id = id;
+
+            PublishToQueue("queue-turma-delete", entidade);
         }
 
         public override Turma ObterPorId(int id)
@@ -46,6 +46,25 @@ namespace FiapStore.Repository
             using var dbConnection = new SqlConnection(ConnectionString);
             var query = "SELECT * FROM Turmas ";
             return dbConnection.Query<Turma>(query).ToList();
+        }
+
+        private void PublishToQueue(string queueName, Turma entidade)
+        {
+            using (var connection = _factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: queueName,
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+
+                var body = JsonSerializer.SerializeToUtf8Bytes(entidade);
+                channel.BasicPublish(exchange: "",
+                                     routingKey: queueName,
+                                     basicProperties: null,
+                                     body: body);
+            }
         }
     }
 }

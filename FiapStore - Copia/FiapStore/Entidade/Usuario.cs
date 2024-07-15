@@ -28,9 +28,9 @@ namespace FiapStore.Entidade
 
         }
 
-        public Usuario(AlterarUusarioDTO alterarUusarioDTO) {
-            UsuarioId = alterarUusarioDTO.UsuarioId;
-            UserName = alterarUusarioDTO.userName;
+        public Usuario(AlterarUsarioDTO AlterarUsarioDTO) {
+            UsuarioId = AlterarUsarioDTO.UsuarioId;
+            UserName = AlterarUsarioDTO.userName;
 
         }
     }

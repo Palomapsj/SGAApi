@@ -1,37 +1,38 @@
 ﻿using Dapper;
 using FiapStore.Entidade;
 using FiapStore.Interface;
+using RabbitMQ.Client;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace FiapStore.Repository
 {
     public class AlunoRepository : DapperRepository<Aluno>, IAlunoRepository
     {
+        private readonly ConnectionFactory _factory;
+
         public AlunoRepository(IConfiguration configuration) : base(configuration)
         {
-
+            _factory = new ConnectionFactory() { HostName = "localhost" };
         }
 
         public override void Alterar(Aluno entidade)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "UPDATE Alunoss SET ENDERECO = @Endereco, TELEFONE = @Telefone, EMAIL = @Email WHERE aluno_id = @AlunoId ";
-            dbConnection.Query(query, entidade);
+            PublishToQueue("queue-aluno-update", entidade);
         }
 
         public override void Cadastrar(Aluno entidade)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "INSERT INTO Alunoss  VALUES (@Nome, @DataNascimento, @Email, @Telefone, @Endereco, @UsuarioId)";
-            dbConnection.Execute(query, entidade);
+            PublishToQueue("queue-aluno-save", entidade);
         }
 
         public override void Deletar(int id)
         {
-            using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "DELETE FROM Alunoss where Aluno_id = @Id";
-            dbConnection.Execute(query, new { Id = id });
+            Aluno entidade = new Aluno();
+            entidade.Id = id;
+
+            PublishToQueue("queue-aluno-delete", entidade);
         }
 
         public override Aluno ObterPorId(int id)
@@ -47,6 +48,25 @@ namespace FiapStore.Repository
             using var dbConnection = new SqlConnection(ConnectionString);
             var query = "SELECT * FROM Alunoss ";
             return dbConnection.Query<Aluno>(query).ToList();
+        }
+
+        private void PublishToQueue(string queueName, Aluno entidade)
+        {
+            using (var connection = _factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: queueName,
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+
+                var body = JsonSerializer.SerializeToUtf8Bytes(entidade);
+                channel.BasicPublish(exchange: "",
+                                     routingKey: queueName,
+                                     basicProperties: null,
+                                     body: body);
+            }
         }
     }
 }
