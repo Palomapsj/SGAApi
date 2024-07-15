@@ -1,5 +1,6 @@
 ﻿using FiapStore.DTO;
 using FiapStore.Entidade;
+using FiapStore.Enums;
 using FiapStore.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@ namespace FiapStore.Controllers
 
         [Authorize]
         [HttpGet("Obter-usuario-porid/{id}")]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         public IActionResult ObtertPorUsuario(int id)
         {
             try
@@ -36,6 +38,7 @@ namespace FiapStore.Controllers
 
         [Authorize]
         [HttpGet("Obter-usuario")]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         public IActionResult ObtertUsuario()
         {
             try
@@ -50,7 +53,7 @@ namespace FiapStore.Controllers
             }
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost("Cadastro-usuario")]
         public IActionResult CadastrarUsuario(AdicionarUsuarioDTO UsuarioDTO)
         {
@@ -72,6 +75,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         [HttpPut("Alterar-usuario")]
         public IActionResult AlterarUsuario(AlterarUsarioDTO UsuarioDTO)
         {
@@ -94,6 +98,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         [HttpDelete("Deletar-usuario/{id}")]
         public IActionResult DeletarUsuario(int id)
         {

@@ -27,6 +27,7 @@ namespace FiapStore.Service
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, usuario.UserName),
+                    new Claim(ClaimTypes.Role, usuario.TipoUsuario.ToString()),
                     new Claim("Id", usuario.Id.ToString()),
                     new Claim("Tipo", usuario.TipoUsuario.ToString()),
                 }),

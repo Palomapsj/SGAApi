@@ -1,4 +1,6 @@
-﻿namespace FiapStore.DTO
+﻿using FiapStore.Enums;
+
+namespace FiapStore.DTO
 {
     public class AdicionarUsuarioDTO
     {
@@ -8,7 +10,7 @@
 
         public string? senha { get; set; }
 
-        public int tipoUsuario { get; set; }
+        public PermissionType tipoUsuario { get; set; }
 
         public int idreferente { get; set; }
     }

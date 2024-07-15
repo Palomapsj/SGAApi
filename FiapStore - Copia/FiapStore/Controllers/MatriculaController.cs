@@ -1,5 +1,6 @@
 ﻿using FiapStore.DTO;
 using FiapStore.Entidade;
+using FiapStore.Enums;
 using FiapStore.Interface;
 using FiapStore.Repository;
 using Microsoft.AspNetCore.Authorization;
@@ -21,8 +22,9 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}, {Permissions.Professor}")]
         [HttpGet("Obter-Matricula-porid/{id}")]
-        public IActionResult ObtertPorTurma(int id)
+        public IActionResult ObtertPorMatricula(int id)
         {
             try
             {
@@ -37,8 +39,9 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}, {Permissions.Professor}")]
         [HttpGet("Obter-Matricula")]
-        public IActionResult ObtertTurma()
+        public IActionResult ObterMatricula()
         {
             try
             {
@@ -53,8 +56,9 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}, {Permissions.Professor}")]
         [HttpPost("Cadastro-Matricula")]
-        public IActionResult CadastrarTurma(AdicionarMatriculaDTO matriculaDTO)
+        public IActionResult CadastrarMatricula(AdicionarMatriculaDTO matriculaDTO)
         {
             try
             {
@@ -70,6 +74,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}, {Permissions.Professor}")]
         [HttpPut("Alterar-Matricula")]
         public IActionResult AlterarMatricula(AlterarMatriculaDTO matriculaDTO)
         {
@@ -88,12 +93,12 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}, {Permissions.Professor}")]
         [HttpDelete("Deletar-Matricula/{id}")]
         public IActionResult DeletarMatricula(int id)
         {
             try
             {
-
                 _logger.LogInformation("deletando matricula");
                 _matriculaRepository.Deletar(id);
                 return Ok("Matricula deletada com sucesso");

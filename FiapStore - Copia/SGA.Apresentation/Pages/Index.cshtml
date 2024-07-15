@@ -39,7 +39,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 500px;
-            margin-top:300px;
         }
     </style>
 </head>
@@ -48,7 +47,7 @@
         <div class="container auth-container">
             <div class="auth-form" id="login-form">
                 <h3 class="text-center">Login</h3>
-                <form>
+                <form id="loginForm">
                     <div class="form-group">
                         <label for="login-email">Email</label>
                         <input type="email" class="form-control" id="login-email" placeholder="Digite seu email">
@@ -58,9 +57,6 @@
                         <input type="password" class="form-control" id="login-password" placeholder="Digite sua senha">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                    <div class="text-center mt-3">
-                        <a href="#">Esqueceu a senha?</a>
-                    </div>
                     <div class="text-center mt-2">
                         <a href="#" onclick="showRegisterForm()">Não tem uma conta? Cadastre-se</a>
                     </div>
@@ -68,7 +64,7 @@
             </div>
             <div class="auth-form" id="register-form" style="display:none;">
                 <h3 class="text-center">Cadastre-se</h3>
-                <form>
+                <form id="cadastroForm">
                     <div class="form-group">
                         <label for="register-name">Nome</label>
                         <input type="text" class="form-control" id="register-name" placeholder="Digite seu nome">
@@ -80,6 +76,14 @@
                     <div class="form-group">
                         <label for="register-password">Senha</label>
                         <input type="password" class="form-control" id="register-password" placeholder="Digite sua senha">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-role">Função</label>
+                        <select class="form-control" id="user-role">
+                            <option value="" disabled selected>Selecione uma função</option>
+                            <option value="2">Professor</option>
+                            <option value="3">Aluno</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
                     <div class="text-center mt-2">
@@ -95,6 +99,86 @@
 @*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 *@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        $(document).ready(function () {
+            checkAuthentication();
+
+            $('#cadastroForm').on('submit', function (event) {
+                event.preventDefault(); // Impede o envio tradicional do formulário
+
+                // Coleta os dados do formulário
+                var formData = {
+                    name: $('#register-name').val(),
+                    userName: $('#register-email').val(),
+                    senha: $('#register-password').val(),
+                    tipoUsuario: $('#user-role').val()
+                };
+
+                // Envia uma solicitação AJAX para a API
+                $.ajax({
+                    url: 'https://localhost:7086/Usuario/Cadastro-usuario', // URL do endpoint da API
+                    type: 'POST', // Método HTTP
+                    contentType: 'application/json', // Tipo de conteúdo
+                    data: JSON.stringify(formData), // Dados a serem enviados
+                    success: function (response) {
+                        // Lógica de sucesso
+                        alert('Usuário cadastrado com sucesso!');
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        // Lógica de erro
+                        alert('Erro ao cadastrar usuário.');
+                        console.error(error);
+                    }
+                });
+            });
+
+            $('#loginForm').on('submit', function (event) {
+                event.preventDefault(); // Impede o envio tradicional do formulário
+
+                // Coleta os dados do formulário
+                var formData = {
+                    userName: $('#login-email').val(),
+                    password: $('#login-password').val()
+                };
+
+                // Envia uma solicitação AJAX para a API
+                $.ajax({
+                    url: 'https://localhost:7086/auth', // URL do endpoint da API
+                    type: 'POST', // Método HTTP
+                    contentType: 'application/json', // Tipo de conteúdo
+                    data: JSON.stringify(formData), // Dados a serem enviados
+                    success: function (response) {
+                        debugger;
+                        localStorage.setItem('authToken', response.token);
+                        checkAuthentication();
+                        if (response.user.tipoUsuario == 1) {
+                            window.location.href = '/ConsultaProfessores';
+                        } else if (response.user.tipoUsuario == 2) {
+                            window.location.href = '/ConsultarAlunos';
+                        } else if (response.user.tipoUsuario == 3) {
+                            window.location.href = '/Notas';
+                        }
+                    },
+                    error: function (error) {
+                        // Lógica de erro
+                        alert('Usuario nao encontrado.');
+                        console.error(error);
+                    }
+                });
+            });
+        });
+
+        function checkAuthentication() {
+            const authToken = localStorage.getItem('authToken');
+            if (authToken) {
+                // Usuário autenticado, habilitar a div
+                $('#divBar').show(); // Mostra a div
+            } else {
+                // Usuário não autenticado, esconder a div
+                $('#divBar').hide(); // Esconde a div
+            }
+        }
+
         function showRegisterForm() {
             document.getElementById('login-form').style.display = 'none';
             document.getElementById('register-form').style.display = 'block';

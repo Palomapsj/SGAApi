@@ -3,6 +3,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo de expiração da sessão
+    options.Cookie.HttpOnly = true; // Protege o cookie
+    options.Cookie.IsEssential = true; // Necessário para funcionar
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

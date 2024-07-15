@@ -1,5 +1,6 @@
 ﻿using FiapStore.DTO;
 using FiapStore.Entidade;
+using FiapStore.Enums;
 using FiapStore.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         [HttpGet("Obter-professor-porid/{id}")]
         public IActionResult ObtertPorUsuario(int id)
         {
@@ -36,6 +38,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         [HttpGet("Obter-professores")]
         public IActionResult ObtertProfessor()
         {
@@ -54,6 +57,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         [HttpPost("Cadastro-professor")]
         public IActionResult CadastrarProfessor(AdicionarProfessorDTO ProfessorDTO)
         {
@@ -71,6 +75,7 @@ namespace FiapStore.Controllers
         }
 
         [Authorize]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         [HttpPut("Alterar-professor")]
         public IActionResult AlterarProfessor(AlterarProfessorDTO ProfessorDTO)
         {
@@ -89,6 +94,7 @@ namespace FiapStore.Controllers
         }
 
         [HttpDelete("Deletar-professor/{id}")]
+        [Authorize(Roles = $"{Permissions.Admin}")]
         public IActionResult DeletarProfessor(int id)
         {
             try

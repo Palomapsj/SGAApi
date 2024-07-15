@@ -1,4 +1,5 @@
 ﻿using FiapStore.DTO;
+using FiapStore.Enums;
 using FiapStore.Interface;
 
 namespace FiapStore.Entidade
@@ -12,7 +13,7 @@ namespace FiapStore.Entidade
 
         public string? Senha { get; set; }
 
-        public int TipoUsuario { get; set; }
+        public PermissionType TipoUsuario { get; set; }
 
         public int Idreferente { get; set; }
 
