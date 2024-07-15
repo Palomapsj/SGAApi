@@ -1,0 +1,59 @@
+﻿@page
+@model SGA.Apresentation.Pages.ConsultarNotasModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Notas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+ 
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h3 class="text-center">Notas</h3>
+                <table class="table table-striped" id="gradesTable">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Nota</th>
+                            <th>Comentários</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Física</td>
+                        <td>9.6</td>
+                        <td>Aluno muito Aplicado</td>
+                    </tr>
+                    <tr>
+                        <td>Quimica</td>
+                        <td>6</td>
+                        <td>Aluno Demonstra certa dificuldade</td>
+                    </tr>
+                    <tr>
+                        <td>Historia</td>
+                        <td>8</td>
+                        <td>Aluno Demonstra muito interesse!</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+    </body>
+    </html>>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+@*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+*@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          // Pegue os valores do formulário
+
