@@ -26,3 +26,4 @@
 /FiapStore - Copia/FiapStore/obj/FiapStore.csproj.nuget.g.props
 /FiapStore - Copia/FiapStore/obj/project.assets.json
 /FiapStore - Copia/FiapStore/obj/project.nuget.cache
+*.vsidx
