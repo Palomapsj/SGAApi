@@ -27,3 +27,27 @@
 /FiapStore - Copia/FiapStore/obj/project.assets.json
 /FiapStore - Copia/FiapStore/obj/project.nuget.cache
 *.vsidx
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/appsettings.json
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/FiapStore.deps.json
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/FiapStore.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/FiapStore.exe
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/FiapStore.pdb
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/RabbitMQ.Client.dll
+/FiapStore - Copia/FiapStore/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/ref/FiapStore.dll
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/refint/FiapStore.dll
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/apphost.exe
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.csproj.CoreCompileInputs.cache
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.csproj.FileListAbsolute.txt
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.dll
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.genruntimeconfig.cache
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.MvcApplicationPartsAssemblyInfo.cs
+/FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.pdb
