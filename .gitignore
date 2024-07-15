@@ -51,3 +51,8 @@
 /FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.genruntimeconfig.cache
 /FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.MvcApplicationPartsAssemblyInfo.cs
 /FiapStore - Copia/FiapStore/obj/Debug/net7.0/FiapStore.pdb
+*.json
+/FiapStore - Copia/.vs/FiapStore/v17/.futdcache.v2
+/FiapStore - Copia/.vs/FiapStore/v17/HierarchyCache.v1.txt
+/FiapStore - Copia/.vs/ProjectEvaluation/fiapstore.metadata.v7.bin
+/FiapStore - Copia/.vs/ProjectEvaluation/fiapstore.projects.v7.bin
