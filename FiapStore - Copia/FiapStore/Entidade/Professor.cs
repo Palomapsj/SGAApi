@@ -17,6 +17,7 @@ namespace FiapStore.Entidade
         public int UsuarioId { get; set; }
 
         public DateTime? DataContratacao { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         public Professor() { }
 
@@ -29,6 +30,7 @@ namespace FiapStore.Entidade
             Telefone = adicionarProfessor.telefone;
             Endereco = adicionarProfessor.endereco;
             UsuarioId = adicionarProfessor.usuarioId;
+            DataNascimento = adicionarProfessor.dataNascimento;
 
         }
 

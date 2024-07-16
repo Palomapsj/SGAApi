@@ -41,34 +41,7 @@
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>João Silva</td>
-                                        <td>joao.silva@example.com</td>
-                                        <td>01/01/1980</td>
-                                        <td>(11) 98765-4321</td>
-                                        <td>Rua A, 123</td>
-                                        <td>Ciências Exatas</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">Editar</button>
-                                            <button class="btn btn-danger btn-sm">Excluir</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Maria Oliveira</td>
-                                        <td>maria.oliveira@example.com</td>
-                                        <td>02/02/1985</td>
-                                        <td>(21) 98765-4322</td>
-                                        <td>Rua B, 456</td>
-                                        <td>Humanas</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">Editar</button>
-                                            <button class="btn btn-danger btn-sm">Excluir</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Adicione mais linhas conforme necessário -->
+                                <tbody id="professores-tbody">
                                 </tbody>
                             </table>
                         </div>
@@ -96,16 +69,33 @@
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken') // Adiciona o token de autenticação
                 },
                 success: function (response) {
-                    // Lógica de sucesso
-                    alert('Dados obtidos com sucesso!');
-                    console.log(response);
+                    // Supondo que 'response' é uma lista de objetos com propriedades: nome, email, dataNascimento, telefone, endereco, departamento
+                    var tbody = $('#professores-tbody');
+                    tbody.empty(); // Limpa a tabela antes de adicionar novos dados
+                    var id = 1; // Inicia o ID sequencial
+                    $.each(response, function (index, professor) {
+                        var tr = $('<tr></tr>');
+                        tr.append('<td>' + id + '</td>'); // Adiciona o ID sequencial
+                        tr.append('<td>' + professor.nome + '</td>');
+                        tr.append('<td>' + professor.email + '</td>');
+                        tr.append('<td>' + professor.dataNascimento + '</td>');
+                        tr.append('<td>' + professor.telefone + '</td>');
+                        tr.append('<td>' + professor.endereco + '</td>');
+                        tr.append('<td>' + professor.departamento + '</td>');
+                        tr.append('<td>' +
+                            '<button class="btn btn-info btn-sm">Editar</button> ' +
+                            '<button class="btn btn-danger btn-sm">Excluir</button>' +
+                            '</td>');
+                        tbody.append(tr);
+                        id++; // Incrementa o ID sequencial
+                    });
                 },
                 error: function (error) {
-                    // Lógica de erro
                     alert('Erro ao obter dados.');
                     console.error(error);
                 }
             });
+        });
         });
 
         function checkAuthentication() {

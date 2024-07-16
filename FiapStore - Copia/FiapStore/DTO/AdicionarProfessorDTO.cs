@@ -13,5 +13,7 @@
         public int usuarioId { get; set; }
 
         public DateTime? dataContratacao { get; set; }
+
+        public DateTime? dataNascimento { get; set; }
     }
 }
