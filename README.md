@@ -1,10 +1,11 @@
-# SGA SISTEMA PARA GERENCIAMENTO DE ALUNOS
+
+### <div align="center">SGA SISTEMA PARA GERENCIAMENTO DE ALUNOS  📚 </div>  
 
 ## Descrição
 SGA é um Sistema de Gestão de Alunos (SGA), desenvolvida para facilitar o gerenciamento de Alunos e assim melhorar a eficiência operacional em ambientes escolares.
 
 ## Funcionalidades Principais
-- Autenticação de usuários
+- Autenticação de usuários 
 - Registro  e consulta de professores
 - Registro e consulta de Alunos
 - Registro e consulta de Aulas
@@ -30,7 +31,7 @@ SGA é um Sistema de Gestão de Alunos (SGA), desenvolvida para facilitar o gere
 - [Documentação Funcional do projeto](https://github.com/Palomapsj/SGAApi/blob/main/Especifica%C3%A7%C3%A3o_funcional_SGA.docx)
 - [Vídeo demonstrando o projeto](https://youtu.be/-b77WFcbVKE)
 
-## Instalação
+## Instalação 
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Palomapsj/SGAApi.git
