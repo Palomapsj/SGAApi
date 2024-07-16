@@ -1,4 +1,4 @@
-# SGA
+# SGA SISTEMA PARA GERENCIAMENTO DE ALUNOS
 
 ## Descrição
 SGA é um Sistema de Gestão de Alunos (SGA), desenvolvida para facilitar o gerenciamento de Alunos e assim melhorar a eficiência operacional em ambientes escolares.
