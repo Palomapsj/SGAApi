@@ -20,9 +20,7 @@ SGA é um Sistema de Gestão de Alunos (SGA), desenvolvida para facilitar o gere
 - rabbitmq
 
 ## Pré-requisitos
-- Node.js
-- MongoDB
-- npm (Node Package Manager)
+
 
 ## Instalação
 1. Clone o repositório:
