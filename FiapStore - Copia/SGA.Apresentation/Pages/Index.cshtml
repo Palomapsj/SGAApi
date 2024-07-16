@@ -18,7 +18,6 @@
         }
 
         .bg {
-
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -96,8 +95,9 @@
 
     <!-- Link do Bootstrap JS e dependências Popper.js e jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-@*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-*@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @*    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    *@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
             checkAuthentication();
@@ -134,7 +134,7 @@
 
             $('#loginForm').on('submit', function (event) {
                 event.preventDefault(); // Impede o envio tradicional do formulário
-
+                debugger;
                 // Coleta os dados do formulário
                 var formData = {
                     userName: $('#login-email').val(),
@@ -149,14 +149,18 @@
                     data: JSON.stringify(formData), // Dados a serem enviados
                     success: function (response) {
                         debugger;
+                        localStorage.removeItem('authToken');
+                        localStorage.removeItem('tipoUsuario');
+
                         localStorage.setItem('authToken', response.token);
+                        localStorage.setItem('tipoUsuario', response.user.tipoUsuario);
                         checkAuthentication();
                         if (response.user.tipoUsuario == 1) {
                             window.location.href = '/ConsultaProfessores';
                         } else if (response.user.tipoUsuario == 2) {
                             window.location.href = '/ConsultarAlunos';
                         } else if (response.user.tipoUsuario == 3) {
-                            window.location.href = '/Notas';
+                            window.location.href = '/ConsultarNotas';
                         }
                     },
                     error: function (error) {
@@ -170,12 +174,35 @@
 
         function checkAuthentication() {
             const authToken = localStorage.getItem('authToken');
-            if (authToken) {
-                // Usuário autenticado, habilitar a div
-                $('#divBar').show(); // Mostra a div
+            const tipoUsuario = localStorage.getItem('tipoUsuario');
+            debugger;
+            if (authToken && tipoUsuario) {
+                $('#divBar').show();
+                if (tipoUsuario == 1) {
+                    $('#abaConsultaProfessores').show();
+                    $('#abaCadastroDeProfessores').show();
+                    $('#abaConsultarAlunos').show();
+                    $('#abaCadastroAlunos').hide();
+                    $('#abaCadastroNotas').hide();
+                    $('#abaConsultarNotas').hide();
+                } else if (tipoUsuario == 2) {
+                    $('#abaConsultarAlunos').show();
+                    $('#abaCadastroAlunos').show();
+                    $('#abaCadastroNotas').show();
+                    $('#abaConsultaProfessores').hide();
+                    $('#abaCadastroDeProfessores').hide();
+                    $('#abaConsultarNotas').hide();
+                } else if (tipoUsuario == 3) {
+                    $('#abaConsultarNotas').show();
+                    $('#abaConsultarAlunos').hide();
+                    $('#abaCadastroAlunos').hide();
+                    $('#abaCadastroNotas').hide();
+                    $('#abaConsultarNotas').hide();
+                    $('#abaConsultaProfessores').hide();
+                    $('#abaCadastroDeProfessores').hide();
+                }
             } else {
-                // Usuário não autenticado, esconder a div
-                $('#divBar').hide(); // Esconde a div
+                $('#divBar').hide();
             }
         }
 

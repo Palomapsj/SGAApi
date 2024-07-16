@@ -39,7 +39,7 @@ namespace FiapStore.Repository
         public override Usuario ObterPorId(int id)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "SELECT * FROM USUARIO where usuario_id = @Id";
+            var query = "SELECT * FROM USUARIO where id = @Id";
 
             return dbConnection.QueryFirstOrDefault<Usuario>(query, new { Id = id });
 

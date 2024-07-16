@@ -37,7 +37,7 @@ namespace FiapStore.Repository
         public override Professor ObterPorId(int id)
         {
             using var dbConnection = new SqlConnection(ConnectionString);
-            var query = "SELECT * FROM Professoress where professor_id = @Id";
+            var query = "SELECT * FROM Professoress where id = @Id";
             return dbConnection.QueryFirstOrDefault<Professor>(query, new { Id = id });
 
         }
